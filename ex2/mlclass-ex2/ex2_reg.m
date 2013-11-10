@@ -70,7 +70,7 @@ lambda = 1;
 fprintf('Cost at initial theta (zeros): %f\n', cost);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============= Part 2: Regularization and Accuracies =============
 %  Optional Exercise:
@@ -98,7 +98,7 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
-hold on;
+%hold on;
 title(sprintf('lambda = %g', lambda))
 
 % Labels and Legend
@@ -106,7 +106,7 @@ xlabel('Microchip Test 1')
 ylabel('Microchip Test 2')
 
 legend('y = 1', 'y = 0', 'Decision boundary')
-hold off;
+%hold off;
 
 % Compute accuracy on our training set
 p = predict(theta, X);
