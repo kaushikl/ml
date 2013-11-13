@@ -18,13 +18,15 @@ p = zeros(size(X, 1), 1);
 X = [ones(m, 1) X];
 
 for d = 1:m
+
   tmp = zeros(num_labels,1);
 
    for c= 1:num_labels
       tmp(c) = sigmoid(all_theta(c,:)* X(d,:)');
-    endfor	
-  	  [x,ix] = max(tmp);	
-	  p(d) = ix;
+   endfor	
+   [x,ix] = max(tmp);	
+   p(d) = ix;
+   
 endfor
 	
 % ====================== YOUR CODE HERE ======================
