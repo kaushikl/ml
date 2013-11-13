@@ -8,8 +8,8 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   to the classifier for label i
 
 % Some useful variables
-m = size(X, 1);
-n = size(X, 2);
+m = size(X, 1); % this has the total training sets; for eg 5000
+n = size(X, 2); % this has the num pixels ; for eg 400
 
 % You need to return the following variables correctly 
 all_theta = zeros(num_labels, n + 1);
@@ -17,6 +17,23 @@ all_theta = zeros(num_labels, n + 1);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
+X
+y	
+fprintf('total labels to iterate %d  %d  %d\n', num_labels, m ,n);
+
+
+options = optimset('GradObj', 'on', 'MaxIter', 50);
+
+for c= 1:num_labels
+    
+    initial_theta = zeros(n + 1, 1);
+	[theta, J, exit_flag] = ...
+			fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
+	              initial_theta, options);
+	all_theta(c,:) = theta';
+	
+endfor
+	all_theta
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the following code to train num_labels
 %               logistic regression classifiers with regularization
@@ -44,7 +61,7 @@ X = [ones(m, 1) X];
 % 
 %     % Run fmincg to obtain the optimal theta
 %     % This function will return theta and the cost 
-%     [theta] = ...
+%     [theta, J, exit_flag] = ...
 %         fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
 %                 initial_theta, options);
 %
